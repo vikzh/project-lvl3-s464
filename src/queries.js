@@ -11,8 +11,9 @@ const parse = (data) => {
     const href = item.querySelector('link').textContent;
     const feedTitle = item.querySelector('title').textContent;
     const description = item.querySelector('description').textContent;
+    const pubDate = item.querySelector('pubDate').textContent;
     const feed = {
-      href, feedTitle, description, id,
+      href, feedTitle, description, id, pubDate,
     };
     return feed;
   });
