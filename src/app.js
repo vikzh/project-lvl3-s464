@@ -1,6 +1,7 @@
 import WatchJs from 'melanke-watchjs';
 import addEventListeners from './listeners';
 import renderFeeds from './renders';
+import { updateFeedsQuery } from './queries';
 
 export default () => {
   const rssInput = document.getElementById('rss-input');
@@ -36,10 +37,10 @@ export default () => {
       button.disabled = true;
       rssInput.classList.remove('is-valid', 'is-invalid');
       rssInput.setAttribute('readonly', 'readonly');
-      // renderEvents('success', 'Loading...', eventTag);
     },
   };
 
+  updateFeedsQuery(state);
   addEventListeners(state, rssInput, button);
 
   WatchJs.watch(state, 'processState', () => {

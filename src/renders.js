@@ -1,5 +1,4 @@
 const feedToString = (feed) => {
-  // console.log(feed);
   const {
     href, feedTitle, description, id, pubDate,
   } = feed;

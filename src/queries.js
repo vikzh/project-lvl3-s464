@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { uniqueId } from 'lodash';
+import { uniqueId, differenceBy } from 'lodash';
 
 const parse = (data) => {
   const parser = new DOMParser();
@@ -18,6 +18,23 @@ const parse = (data) => {
     return feed;
   });
   return { title, feeds };
+};
+
+export const updateFeedsQuery = (state) => {
+  const promises = state.feedLinks.map(axios.get);
+  axios.all(promises)
+    .then((allRssChannels) => {
+      const newFeeds = allRssChannels.map(channel => parse(channel.data).feeds)
+        .flat();
+      const feedsToAdd = differenceBy(newFeeds, state.feeds, 'href');
+      // eslint-disable-next-line no-param-reassign
+      state.feeds = [...feedsToAdd, ...state.feeds];
+    })
+    .finally(() => {
+      setInterval(() => {
+        updateFeedsQuery(state);
+      }, 5000);
+    });
 };
 
 export default (url, state) => {
