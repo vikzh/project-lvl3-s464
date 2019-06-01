@@ -38,6 +38,10 @@ export default () => {
       rssInput.classList.remove('is-valid', 'is-invalid');
       rssInput.setAttribute('readonly', 'readonly');
     },
+
+    error: () => {
+      state.processState = 'init';
+    },
   };
 
   updateFeedsQuery(state);
