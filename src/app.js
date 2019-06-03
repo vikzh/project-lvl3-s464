@@ -1,6 +1,6 @@
 import WatchJs from 'melanke-watchjs';
 import addEventListeners from './listeners';
-import renderFeeds from './renders';
+import renderFeeds from './renderers';
 import { updateFeedsQuery } from './queries';
 
 export default () => {
