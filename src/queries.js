@@ -27,7 +27,6 @@ export const updateFeedsQuery = (state) => {
       const newFeeds = allRssChannels.map(channel => parse(channel.data).feeds)
         .flat();
       const feedsToAdd = differenceBy(newFeeds, state.feeds, 'href');
-      // eslint-disable-next-line no-param-reassign
       state.feeds = [...feedsToAdd, ...state.feeds];
     })
     .finally(() => {
@@ -40,19 +39,14 @@ export const updateFeedsQuery = (state) => {
 export default (url, state) => {
   axios.get(url)
     .then(({ data }) => {
-      // eslint-disable-next-line no-param-reassign
       state.processState = 'init';
       const doc = parse(data);
       const { title, feeds } = doc;
-      // eslint-disable-next-line no-param-reassign
       state.channelTitles = [title, ...state.channelTitles];
-      // eslint-disable-next-line no-param-reassign
       state.feedLinks = [...state.feedLinks, url];
-      // eslint-disable-next-line no-param-reassign
       state.feeds = [...feeds, ...state.feeds];
     })
     .catch(() => {
-      // eslint-disable-next-line no-param-reassign
       state.processState = 'error';
     });
 };

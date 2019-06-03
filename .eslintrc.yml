@@ -4,3 +4,6 @@ env:
 extends: airbnb-base
 
 parser: babel-eslint
+
+rules:
+  no-param-reassign: off
