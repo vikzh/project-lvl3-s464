@@ -32,7 +32,15 @@ const feedToString = (feed) => {
 </div>`;
 };
 
-export default (state) => {
+const renderFeeds = (state) => {
   const feedDiv = document.getElementById('feeds');
   feedDiv.innerHTML = state.feeds.map(feedToString).join('');
 };
+
+const renderEvents = (eventType, message, tag) => {
+  tag.innerHTML = `<div class="alert alert-${eventType}" role="alert">
+  ${message}
+</div>`;
+};
+
+export { renderFeeds, renderEvents };
