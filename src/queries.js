@@ -21,7 +21,7 @@ const parse = (data) => {
 };
 
 export const updateFeedsQuery = (state) => {
-  const promises = state.feedLinks.map(axios.get);
+  const promises = state.feedLinks.map(feedLink => axios.get(feedLink, { timeout: 4000 }));
   axios.all(promises)
     .then((allRssChannels) => {
       const newFeeds = allRssChannels.map(channel => parse(channel.data).feeds)
@@ -30,14 +30,14 @@ export const updateFeedsQuery = (state) => {
       state.feeds = [...feedsToAdd, ...state.feeds];
     })
     .finally(() => {
-      setInterval(() => {
+      setTimeout(() => {
         updateFeedsQuery(state);
       }, 5000);
     });
 };
 
 export default (url, state) => {
-  axios.get(url)
+  axios.get(url, { timeout: 5000 })
     .then(({ data }) => {
       state.processState = 'init';
       const doc = parse(data);

@@ -21,6 +21,7 @@ export default () => {
       rssInput.classList.remove('is-invalid');
       rssInput.classList.remove('is-valid');
       rssInput.value = '';
+      eventsTag.innerHTML = '';
     },
 
     invalid: () => {
