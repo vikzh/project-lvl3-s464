@@ -18,10 +18,11 @@ export default () => {
 
   const stateActions = {
     init: () => {
-      rssInput.classList.remove('is-invalid');
-      rssInput.classList.remove('is-valid');
+      rssInput.classList.remove('is-invalid', 'is-valid');
       rssInput.value = '';
       eventsTag.innerHTML = '';
+      button.disabled = false;
+      rssInput.removeAttribute('readonly');
     },
 
     invalid: () => {

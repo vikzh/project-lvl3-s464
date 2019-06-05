@@ -35,6 +35,7 @@ const feedToString = (feed) => {
 const renderFeeds = (state) => {
   const feedDiv = document.getElementById('feeds');
   feedDiv.innerHTML = state.feeds.map(feedToString).join('');
+  state.processState = 'init';
 };
 
 const renderEvents = (eventType, message, tag) => {
